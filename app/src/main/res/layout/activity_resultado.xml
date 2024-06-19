@@ -1,0 +1,88 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResultadoActivity">
+
+    <!-- Container para os dados do aluno -->
+    <LinearLayout
+        android:id="@+id/containerDadosAluno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+        <!-- Nome do aluno -->
+        <TextView
+            android:id="@+id/textViewNomeAluno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Aluno"
+            android:textSize="20sp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Adicione mais elementos para os dados do aluno conforme necessário -->
+
+    </LinearLayout>
+
+    <!-- Container para exibir o resultado -->
+    <LinearLayout
+        android:id="@+id/containerResultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/containerDadosAluno"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+        <!-- Resultado do questionário -->
+        <TextView
+            android:id="@+id/textViewResultado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Resultado"
+            android:textSize="24sp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Mensagem do resultado -->
+        <TextView
+            android:id="@+id/textViewMensagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal" />
+
+        <!-- Imagem do resultado -->
+        <ImageView
+            android:id="@+id/imageViewResultado"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+    <!-- Botão para fechar a tela -->
+    <Button
+        android:id="@+id/buttonFechar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fechar"
+        android:layout_below="@id/containerResultado"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/txtIdAlunoResultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="182dp"
+        android:layout_marginEnd="171dp"
+        android:text="TextView"
+        android:visibility="invisible" />
+
+</RelativeLayout>

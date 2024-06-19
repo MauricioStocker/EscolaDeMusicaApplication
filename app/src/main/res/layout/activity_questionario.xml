@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionarioActivity">
+
+    <!-- Container para os dados do aluno -->
+    <LinearLayout
+        android:id="@+id/containerDadosAluno"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Adicione aqui os dados do aluno -->
+        <TextView
+            android:id="@+id/textViewNomeAluno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Aluno"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewIDAluno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID do Aluno"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <!-- Container para o layout do questionário -->
+    <FrameLayout
+        android:id="@+id/containerQuestionario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/containerDadosAluno"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background">
+
+        <!-- Layout do questionário -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textViewPergunta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="Questões"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupOpcoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewPergunta"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radioButtonOpcao1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opção 1" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOpcao2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opção 2" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOpcao3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opção 3" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonOpcao4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Opção 4" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/buttonResponder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/radioGroupOpcoes"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Responder" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buttonResponder"
+                android:layout_marginTop="20dp"
+                android:max="5"
+                android:progress="0"
+                android:progressTint="#0CE415" />
+        </RelativeLayout>
+    </FrameLayout>
+
+</RelativeLayout>

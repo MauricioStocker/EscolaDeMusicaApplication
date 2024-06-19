@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "574959461269",
+    "project_id": "escola-de-musica-rock-nroll",
+    "storage_bucket": "escola-de-musica-rock-nroll.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574959461269:android:f21d6cc7fb18c894444c9c",
+        "android_client_info": {
+          "package_name": "com.br.escolademusicaapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXvG0sWMltjxEh_XrER9euJFxIZdMdClk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
