@@ -22,7 +22,7 @@ MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         conexao = Conexao.getInstance(this);
 
-      buscaTodosAlunos();
+     // buscaTodosAlunos();
         buscaTodosProfessores();
     }
 
@@ -39,7 +39,7 @@ MainActivity extends AppCompatActivity {
                 Log.d("Aluno", "Status: " + aluno.getStatus());
                 Log.d("Aluno", "Telefone: " + aluno.getAluno_telefone());
                 Log.d("Aluno", "CPF: " + aluno.getAluno_cpf());
-                Log.d("Aluno", "Senha: " + aluno.getAluno_senha());
+                Log.d("Aluno", "foto: " + aluno.getAluno_foto());
                 Log.d("Aluno", "-------------------------------------");
             }
         } else {

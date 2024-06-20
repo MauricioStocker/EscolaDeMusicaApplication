@@ -863,7 +863,7 @@ public class Conexao extends SQLiteOpenHelper {
             return false;
         } finally {
             if (db != null && db.isOpen()) {
-                db.close(); // Fecha a conexão com o banco de dados
+
             }
         }
     }
@@ -905,7 +905,7 @@ public class Conexao extends SQLiteOpenHelper {
         }
 
         int rowsAffected = db.update("curso", values, "curso_id=?", new String[]{String.valueOf(id)});
-        db.close();
+
         return rowsAffected > 0;
     }
 
@@ -986,7 +986,7 @@ public class Conexao extends SQLiteOpenHelper {
     public boolean deleteGaleria(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         int rowsDeleted = db.delete("galeria", "galeria_id=?", new String[]{String.valueOf(id)});
-        db.close();
+
         return rowsDeleted > 0;
     }
 
