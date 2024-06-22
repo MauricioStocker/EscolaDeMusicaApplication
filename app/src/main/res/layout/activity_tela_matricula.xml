@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TelaMatriculaActivity">
+
+    <!-- Layout do Aluno -->
+    <LinearLayout
+        android:id="@+id/alunoLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Foto do Aluno -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fotoAluno"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/user"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="2dp" />
+
+        <!-- Nome do Aluno -->
+        <TextView
+            android:id="@+id/nomeAluno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nome do Aluno"
+            android:textColor="@color/ic_launcher_atualizar1_background"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- ID do Aluno -->
+        <TextView
+            android:id="@+id/idAluno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="ID: "
+            android:textSize="16sp"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <!-- Layout do Professor -->
+
+    <!-- Lista de Professores -->
+
+
+    <LinearLayout
+        android:id="@+id/professorLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alunoLayout">
+
+        <!-- Foto do Professor -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fotoProfessor"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/user"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="2dp" />
+
+        <!-- Nome do Professor -->
+        <TextView
+            android:id="@+id/nomeProfessor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Para cadastrar-se em uma disciplina"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Disciplina do Professor -->
+        <TextView
+            android:id="@+id/disciplinaProfessor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Escolha um professor da lista a baixo, e clique nele! Assim que escolher o professor, clicar no botão salvar a baixo! Ou Voltar para sair!"
+            android:textSize="16sp" />
+
+        <!-- ID do Professor -->
+        <TextView
+            android:id="@+id/idProfessor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Assim que escolher o professor, clicar no botão salvar a baixo! Ou Voltar para sair!"
+            android:textSize="16sp"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="170dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/professorLayout"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnRealizarMatricula"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_launcher_salvar2_foreground"
+        android:backgroundTint="@color/ic_launcher_atualizar1_background"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnVoltarPortal"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_launcher_voltar2_foreground"
+        android:backgroundTint="@color/ic_launcher_atualizar1_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnAjudaMatricula"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:background="@drawable/ic_launcher_aluda2_foreground"
+        android:backgroundTint="@color/ic_launcher_atualizar1_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

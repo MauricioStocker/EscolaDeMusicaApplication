@@ -1,0 +1,302 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/funodetelaescolademusica">
+
+    <!-- Layout para exibir os dados do professor -->
+
+    <!-- Novo Layout para exibir os dados do aluno -->
+
+    <!-- RecyclerView para exibir a lista de alunos -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/professorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background">
+
+        <!-- Imagem do professor -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/fotoProfessorPortal"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/user"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Nome do professor -->
+        <TextView
+            android:id="@+id/txtRecebeNomeProfe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:maxLength="22"
+            android:text="Nome Professor"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/fotoProfessorPortal"
+            app:layout_constraintTop_toBottomOf="@id/txtRecebeIdProfe" />
+
+        <!-- ID do professor -->
+        <TextView
+            android:id="@+id/txtRecebeIdProfe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Id do professor"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintStart_toEndOf="@id/fotoProfessorPortal"
+            app:layout_constraintTop_toTopOf="@id/fotoProfessorPortal" />
+
+        <!-- Disciplina do professor -->
+        <TextView
+            android:id="@+id/txtRecebeDisciplinaProfe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Disciplina do Professor"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/fotoProfessorPortal"
+            app:layout_constraintTop_toBottomOf="@id/txtRecebeNomeProfe" />
+
+        <!-- Botão para editar cadastro -->
+        <Button
+            android:id="@+id/btnEditarCadastro"
+            android:layout_width="89dp"
+            android:layout_height="68dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_launcher_editar_cadastro_foreground"
+            android:backgroundTint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fotoProfessorPortal" />
+
+        <!-- Botão para voltar -->
+        <Button
+            android:id="@+id/btnVoltar"
+            android:layout_width="86dp"
+            android:layout_height="68dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_launcher_logout_foreground"
+            android:backgroundTint="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fotoProfessorPortal" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Portal Do Professor"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.071" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Perfil"
+            android:textColor="@color/ic_launcher_atualizar1_background"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.026"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.763" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logoff"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.951"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.752" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/alunoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/professorLayout"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background">
+
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome :  "
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.048"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.163" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dados Do Aluno Para Edição"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.021" />
+
+        <TextView
+            android:id="@+id/txtRecebeNomeDaLista"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="20"
+            android:text="Aluno"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.401"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.157" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nota Primeiro Bimestre :"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.072"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.313" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nota Segundo Bimestre :"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.082"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.501" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Faltas:"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.047"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.686" />
+
+        <EditText
+            android:id="@+id/txtRecebenotaPrimeiroBimLista"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+            android:ems="10"
+            android:inputType="text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.67"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.276" />
+
+        <EditText
+            android:id="@+id/txtRecebenotaSegundoBimLista"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+            android:ems="10"
+            android:inputType="text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.67"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/txtRecebeFaltaLista"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
+            android:ems="10"
+            android:inputType="text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.67"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.707" />
+
+        <Button
+            android:id="@+id/btnAlteraNotasAlunos"
+            android:layout_width="86dp"
+            android:layout_height="68dp"
+            android:background="@drawable/ic_launcher_atualizar1_foreground"
+            android:backgroundTint="@android:color/primary_text_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.467"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/alunosRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/alunoLayout"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background" />
+</RelativeLayout>

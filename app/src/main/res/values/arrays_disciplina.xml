@@ -1,0 +1,13 @@
+<resources>
+    <!-- Outras strings -->
+    <string-array name="disciplinas_array">
+        <item>Matemática</item>
+        <item>Português</item>
+        <item>Inglês</item>
+        <item>História</item>
+        <item>Geografia</item>
+        <item>Virtual</item>
+
+        <!-- Adicione outras disciplinas conforme necessário -->
+    </string-array>
+</resources>

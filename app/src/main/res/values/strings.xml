@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Escola de Música</string>
+
+    <string-array name="spinnerSexoProfessor">
+        <item>Feminino</item>
+        <item>Masculino</item>
+        <item>Outros</item>
+    </string-array>
+</resources>

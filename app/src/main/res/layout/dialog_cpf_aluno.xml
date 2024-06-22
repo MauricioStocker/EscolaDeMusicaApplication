@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditText para inserir o CPF -->
+    <EditText
+        android:id="@+id/editTextCPF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite o CPF do aluno"
+        android:inputType="number"
+        android:maxLength="11"
+        android:maxLines="1"/>
+
+    <!-- Botão para buscar o aluno -->
+    <Button
+        android:id="@+id/btnBuscarAluno"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/pesquisademembros" />
+
+</LinearLayout>

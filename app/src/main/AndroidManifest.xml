@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher_escola_2"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_escola_2"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:targetApi="31">
+        <activity
+            android:name=".AddGaleriaActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AddCursoActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ResultadoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".QuestionarioActivity"
+            android:exported="true" />
+        <activity
+            android:name=".EdicaoPerfilProfessorActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DadosAlunoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ListaAlunosRegistradoActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".ListaAlunosActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TelaMatriculaActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ListaCursosActivity"
+            android:exported="true" />
+        <activity
+            android:name=".GaleriaFotosActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DadosProfessorActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ListaProfessorActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".CadastroProfessorActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".CadastroAlunoActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".PainelAdmActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PortalProfessorActivity"
+            android:exported="true" />
+        <activity
+            android:name=".PortalDoAlunoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TelaPrincipalActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TelaLoginActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ApresentacaoActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

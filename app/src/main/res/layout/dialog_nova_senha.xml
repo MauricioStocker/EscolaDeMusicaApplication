@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- EditTexts para inserir a nova senha -->
+    <EditText
+        android:id="@+id/editTextNovaSenha1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite a nova senha"
+        android:inputType="textPassword"
+        android:maxLength="8"
+        android:maxLines="1"/>
+
+    <EditText
+        android:id="@+id/editTextNovaSenha2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirme a nova senha"
+        android:inputType="textPassword"
+        android:maxLength="8"
+        android:maxLines="1"/>
+
+    <!-- Botão para confirmar a nova senha -->
+    <Button
+        android:id="@+id/btnConfirmarSenha"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/ic_launcher_salvar1_foreground"
+        android:backgroundTint="@color/ic_launcher_atualizar1_background" />
+
+</LinearLayout>
