@@ -12,7 +12,7 @@ public class PainelAdmActivity extends AppCompatActivity {
 
 	Button btnCadastraProfessor,btnAddCurso, btnAddGaleria;
 
-	Button btnListaProfessor, btnVoltarTelaPricipal, btnListaAlunos;
+	Button btnListaProfessor, btnVoltarTelaPricipal, btnListaAlunos,btnConsultaTurma;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,14 @@ public class PainelAdmActivity extends AppCompatActivity {
 		btnListaAlunos = findViewById(R.id.btnListaAluno);
 		btnAddCurso = findViewById(R.id.btnAddCurso);
 		btnAddGaleria = findViewById(R.id.btnAddGaleria);
+		btnConsultaTurma = findViewById(R.id.btnConsultaTurma);
+		btnConsultaTurma.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				chamaTurmas();
+			}
+		});
 		btnAddGaleria.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -103,6 +111,11 @@ public class PainelAdmActivity extends AppCompatActivity {
 	}
 	public void chamaAddGaleria() {
 		Intent intent = new Intent(this, AddGaleriaActivity.class);
+		startActivity(intent);
+		finish();
+	}
+	public void chamaTurmas() {
+		Intent intent = new Intent(this, TurmasFinalizadasActivity.class);
 		startActivity(intent);
 		finish();
 	}

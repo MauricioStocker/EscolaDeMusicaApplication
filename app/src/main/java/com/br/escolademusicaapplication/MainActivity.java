@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.br.escolademusicaapplication.DAO.Conexao;
 import com.br.escolademusicaapplication.OBJETOS.Aluno;
 import com.br.escolademusicaapplication.OBJETOS.Professor;
+import com.br.escolademusicaapplication.OBJETOS.Turma;
 
 import java.util.List;
 
@@ -23,7 +24,8 @@ MainActivity extends AppCompatActivity {
         conexao = Conexao.getInstance(this);
 
      // buscaTodosAlunos();
-        buscaTodosProfessores();
+       // buscaTodosProfessores();
+        buscaTodasTurmas();
     }
 
     public void buscaTodosAlunos() {
@@ -65,4 +67,26 @@ MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Nenhum professor cadastrado.", Toast.LENGTH_SHORT).show();
         }
     }
-}
+        public void buscaTodasTurmas() {
+            List<Turma> turmas = conexao.buscarTodasTurmas();
+
+            // Verifique se a lista de turmas não está vazia
+            if (!turmas.isEmpty()) {
+                // Iterar sobre a lista de turmas
+                for (Turma turma : turmas) {
+                    // Faça o que for necessário com os dados da turma
+                    Log.d("Turma", "ID: " + turma.getTurma_id());
+                    Log.d("Turma", "Professor ID: " + turma.getProfessor_id());
+                    Log.d("Turma", "Alunos: " + turma.getAlunos());
+                    Log.d("Turma", "Data de Encerramento: " + turma.getData_encerramento());
+                    Log.d("Turma", "-------------------------------------");
+                }
+            } else {
+                Toast.makeText(this, "Nenhuma turma cadastrada.", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        // Métodos buscaTodosAlunos() e buscaTodosProfessores() permanecem como estão
+    }
+
+

@@ -23,6 +23,7 @@ import com.br.escolademusicaapplication.OBJETOS.Professor;
 import com.br.escolademusicaapplication.OBJETOS.ProfessorSingleton;
 import com.br.escolademusicaapplication.adaptor.ProfessorAlunoAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -33,7 +34,7 @@ public class PortalProfessorActivity extends AppCompatActivity implements Profes
     private CircleImageView fotoProfessorPortal;
     private RecyclerView alunosRecyclerView;
     private ProfessorAlunoAdapter adapter;
-    private Button btnAlteraNotasAlunos, btnEditarCadastro, btnVoltar;
+    private Button btnAlteraNotasAlunos, btnEditarCadastro, btnVoltar,btnSalvarTurma;
     private int alunoSelecionadoId;
 
     @SuppressLint({"WrongViewCast", "SetTextI18n"})
@@ -56,6 +57,13 @@ public class PortalProfessorActivity extends AppCompatActivity implements Profes
         btnAlteraNotasAlunos = findViewById(R.id.btnAlteraNotasAlunos);
         btnEditarCadastro = findViewById(R.id.btnEditarCadastro);
         btnVoltar = findViewById(R.id.btnVoltar);
+        btnSalvarTurma = findViewById(R.id.btnSalvarTurma);
+        btnSalvarTurma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salvarTurmaProfessor();
+            }
+        });
 
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -203,4 +211,26 @@ public class PortalProfessorActivity extends AppCompatActivity implements Profes
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+    private void salvarTurmaProfessor() {
+        Professor professor = ProfessorSingleton.getInstance().getProfessor();
+        if (professor != null) {
+            int idProfessor = professor.getProfessor_id();
+            List<Aluno_Professor> listaAlunosProfessor = conexao.buscarAlunosDoProfessor(idProfessor);
+
+            if (listaAlunosProfessor.isEmpty()) {
+                Toast.makeText(this, "Nenhum aluno encontrado para o professor.", Toast.LENGTH_SHORT).show();
+            } else {
+                String dataEncerramento = "2024-06-23"; // Exemplo de data de encerramento, pode ser dinâmico
+                conexao.salvarTurma(idProfessor, listaAlunosProfessor, dataEncerramento);
+                Toast.makeText(this, "Turma salva com sucesso!", Toast.LENGTH_SHORT).show();
+
+                // Atualizar a interface para refletir lista vazia de alunos
+                setupRecyclerView(new ArrayList<>());
+            }
+        } else {
+            Toast.makeText(this, "Erro ao obter dados do professor.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }
