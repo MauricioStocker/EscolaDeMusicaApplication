@@ -1,3 +1,4 @@
+
 package com.br.escolademusicaapplication;
 
 import androidx.appcompat.app.ActionBar;
@@ -31,6 +32,7 @@ import java.util.Calendar;
 
 public class CadastroAlunoActivity extends AppCompatActivity {
     private String cpf;
+    private static int ultimaMatricula = 1;
 
     EditText txtnome, txtTelefone, txtDataNasc, txtEndereco, txtCep;
     EditText txtCpf;
@@ -204,7 +206,7 @@ public class CadastroAlunoActivity extends AppCompatActivity {
         }
     }
 
-    private void insereAluno(String nome, String cpf, String senha, String telefone) {
+    private void insereAluno(String nome, String cpf, String senha, String telefone, String data) {
         cpf = cpf.replaceAll("[^\\d]", "");
 
         Aluno aluno = new Aluno();
@@ -212,8 +214,14 @@ public class CadastroAlunoActivity extends AppCompatActivity {
         aluno.setAluno_cpf(cpf);
         aluno.setAluno_senha(senha);
         aluno.setAluno_telefone(telefone);
+        aluno.setAluno_dataNascimento(data);
         aluno.setStatus("inativo");
 
+        // Gerar matrícula automática
+        String matricula = gerarMatricula();
+        aluno.setAluno_matricula(matricula);
+
+        // Insere o aluno no banco de dados
         int idAluno = conexao.insereAluno(aluno);
 
         if (idAluno > 0) {
@@ -223,6 +231,7 @@ public class CadastroAlunoActivity extends AppCompatActivity {
             Toast.makeText(this, "Erro ao cadastrar aluno!", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void voltarTelaLogin() {
         Intent intent = new Intent(this, TelaLoginActivity.class);
@@ -249,7 +258,7 @@ public class CadastroAlunoActivity extends AppCompatActivity {
         builder.setPositiveButton("Aceitar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                insereAluno(txtnome.getText().toString(), txtCpf.getText().toString(), txtPasswordCadastro.getText().toString(), txtTelefone.getText().toString());
+                insereAluno(txtnome.getText().toString(), txtCpf.getText().toString(), txtPasswordCadastro.getText().toString(), txtTelefone.getText().toString(),txtDataNasc.getText().toString());
             }
         });
 
@@ -269,7 +278,9 @@ public class CadastroAlunoActivity extends AppCompatActivity {
     private void mostrarDialogoSucesso() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Cadastro Realizado");
-        builder.setMessage("Cadastro realizado com sucesso! Você será redirecionado para a tela de login.");
+        builder.setMessage("Cadastro realizado com sucesso! Sua conta está pendente de ativação pelo" +
+                " administrador. Aguarde a validação. O administrador entrará em contato para " +
+                "avisar quando sua conta estiver ativa e você poderá fazer login.");
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -380,5 +391,25 @@ public class CadastroAlunoActivity extends AppCompatActivity {
             }
         }
     }
-}
+    private int getProximaMatriculaDoBanco() {
+        // Simula a consulta ao banco de dados para obter a próxima matrícula
+        int proximaMatricula = ultimaMatricula;
 
+        // Incrementa o contador da matrícula para o próximo aluno
+        ultimaMatricula++;
+
+        return proximaMatricula;
+    }
+
+    private String gerarMatricula() {
+        // Obtém o ano atual
+        int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+
+        // Formata a matrícula com o ano atual e o número sequencial
+        String matriculaFormatada = anoAtual + String.format("%04d", ultimaMatricula++);
+
+        return matriculaFormatada;
+    }
+
+
+}

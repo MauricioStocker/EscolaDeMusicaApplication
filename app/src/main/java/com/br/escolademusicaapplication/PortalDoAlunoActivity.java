@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +27,7 @@ import android.text.style.ImageSpan;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,7 +54,7 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 
 	private CircleImageView fotoAluno;
 	private Button btnAtualizar, btnExcluir, btnVoltar, btnMatricula,btnAva;
-	private TextView txtNomeRecebido, txtIdRecebido;
+	private TextView txtNomeRecebido, txtIdRecebido, txtMatriculaRecebido;
 	private Bitmap fotoCapturada;
 	private String fotoEmString = "";
 	private Conexao conexao;
@@ -82,7 +84,15 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 		btnVoltar = findViewById(R.id.btnVoltarTelaInicial);
 		txtNomeRecebido = findViewById(R.id.txtNomeRecebidoProfessor);
 		txtIdRecebido = findViewById(R.id.txtIdRecebido);
+		txtMatriculaRecebido = findViewById(R.id.txtMatriculaRecebido);
 		btnAva = findViewById(R.id.btnAva);
+		Button btnCarteirinha = findViewById(R.id.btnCarteirinha);
+		btnCarteirinha.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				mostrarCarteirinha();
+			}
+		});
 		btnAva.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -96,6 +106,7 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 		if (aluno != null) {
 			txtNomeRecebido.setText(aluno.getAluno_nome());
 			txtIdRecebido.setText(String.valueOf(aluno.getAluno_id()));
+			txtMatriculaRecebido.setText("Matrícula: " + aluno.getAluno_matricula());
 
 			// Carregar a foto do aluno, se existir
 			if (aluno.getAluno_foto() != null && !aluno.getAluno_foto().isEmpty()) {
@@ -107,6 +118,7 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 				fotoAluno.setImageResource(android.R.drawable.ic_menu_camera);
 			}
 		}
+
 
 		btnMatricula.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -219,8 +231,12 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 					}
 					break;
 			}
+		} else {
+			// Se não houver resultado, defina fotoEmString como nulo ou mantenha a foto existente
+			fotoEmString = null;
 		}
 	}
+
 
 
 
@@ -248,19 +264,26 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 		Aluno aluno = new Aluno();
 		aluno.setAluno_id(idAluno);
 		aluno.setAluno_nome(nome);
-		aluno.setAluno_foto(fotoEmString);
+
+		if (fotoEmString != null) {
+			aluno.setAluno_foto(fotoEmString);
+		} else {
+			// Manter a foto existente ou definir uma foto padrão
+			aluno.setAluno_foto(AlunoSingleton.getInstance().getAluno().getAluno_foto());
+		}
 
 		boolean sucesso = conexao.atualizarAluno(aluno);
 
 		if (sucesso) {
 			Toast.makeText(getApplicationContext(), "Aluno atualizado com sucesso", Toast.LENGTH_SHORT).show();
 			// Atualizar a imagem na ImageView fotoAluno
-			Bitmap fotoAtualizada = decodeBase64ToBitmap(fotoEmString);
+			Bitmap fotoAtualizada = decodeBase64ToBitmap(aluno.getAluno_foto());
 			fotoAluno.setImageBitmap(fotoAtualizada);
 		} else {
 			Toast.makeText(getApplicationContext(), "Erro ao atualizar o aluno", Toast.LENGTH_SHORT).show();
 		}
 	}
+
 
 	// Método auxiliar para decodificar a string Base64 em Bitmap
 	private Bitmap decodeBase64ToBitmap(String base64String) {
@@ -401,13 +424,16 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 
 	// Método para atualizar os dados do aluno na tela
 	private void atualizarDadosDoAluno(int idAluno) {
-		Aluno aluno = AlunoSingleton.getInstance().getAluno();
+		// Busca o aluno completo no banco de dados
+		Aluno aluno = conexao.buscarAlunoPorId(idAluno);
 
 		if (aluno != null) {
+			// Preenche os dados do aluno
 			txtNomeRecebido.setText(aluno.getAluno_nome());
+			txtMatriculaRecebido.setText("Matrícula: " + aluno.getAluno_matricula());
 
 			// Busca a foto do aluno e exibe na tela
-			String fotoAlunoBase64 = conexao.buscarFotoAluno(aluno.getAluno_id());
+			String fotoAlunoBase64 = aluno.getAluno_foto();
 			if (fotoAlunoBase64 != null && !fotoAlunoBase64.isEmpty()) {
 				byte[] fotoBytes = Base64.decode(fotoAlunoBase64, Base64.DEFAULT);
 				Bitmap fotoAlunoBitmap = BitmapFactory.decodeByteArray(fotoBytes, 0, fotoBytes.length);
@@ -423,6 +449,8 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 			Toast.makeText(this, "Dados do aluno não encontrados", Toast.LENGTH_SHORT).show();
 		}
 	}
+
+
 	public void chamaAva() {
 		Intent intent = new Intent(this, QuestionarioActivity.class);
 		// Passar dados do aluno para a próxima Activity
@@ -431,4 +459,46 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 		startActivity(intent);
 		finish(); // Isso pode ser omitido se você deseja que a tela de Portal do Aluno permaneça na pilha de atividades
 	}
+	private void mostrarCarteirinha() {
+		// Obtém o ID do aluno logado
+		int idAlunoLogado = AlunoSingleton.getInstance().getAluno().getAluno_id();
+
+		// Busca o aluno completo no banco de dados
+		Aluno aluno = conexao.buscarAlunoPorId(idAlunoLogado);
+
+		// Cria e configura o diálogo
+		Dialog dialog = new Dialog(this);
+		dialog.setContentView(R.layout.dialog_carteirinha);
+		dialog.setTitle("Carteirinha do Estudante");
+
+		// Obtém as referências das views do diálogo
+		ImageView fotoCarteirinha = dialog.findViewById(R.id.fotoCarteirinha);
+		TextView nomeCarteirinha = dialog.findViewById(R.id.nomeCarteirinha);
+		TextView matriculaCarteirinha = dialog.findViewById(R.id.matriculaCarteirinha);
+		TextView cpfCarteirinha = dialog.findViewById(R.id.cpfCarteirinha);
+		TextView dataNascCarteirinha = dialog.findViewById(R.id.dataNascCarteirinha);
+
+		// Preenche os dados na carteirinha
+		if (aluno != null) {
+			nomeCarteirinha.setText(aluno.getAluno_nome());
+			matriculaCarteirinha.setText("Matrícula: " + aluno.getAluno_matricula());
+			cpfCarteirinha.setText("CPF: " + aluno.getAluno_cpf());
+			dataNascCarteirinha.setText("Data de Nascimento: " + aluno.getAluno_dataNascimento());
+
+			// Verifica se há uma foto válida para exibir
+			if (aluno.getAluno_foto() != null && !aluno.getAluno_foto().isEmpty()) {
+				byte[] fotoBytes = Base64.decode(aluno.getAluno_foto(), Base64.DEFAULT);
+				Bitmap fotoAlunoBitmap = BitmapFactory.decodeByteArray(fotoBytes, 0, fotoBytes.length);
+				fotoCarteirinha.setImageBitmap(fotoAlunoBitmap);
+			} else {
+				// Caso não haja foto, você pode exibir um ícone padrão ou deixar em branco
+				fotoCarteirinha.setImageResource(R.drawable.user);
+			}
+		}
+
+		dialog.show();
+	}
+
+
+
 }

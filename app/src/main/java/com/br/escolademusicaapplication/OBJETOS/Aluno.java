@@ -11,6 +11,15 @@ public class Aluno implements Serializable {
     private String aluno_cpf;
     private String aluno_senha;
     private String aluno_endereco;
+    private String aluno_matricula;
+
+    public String getAluno_matricula() {
+        return aluno_matricula;
+    }
+
+    public void setAluno_matricula(String aluno_matricula) {
+        this.aluno_matricula = aluno_matricula;
+    }
 
     public static void setInstance(Aluno instance) {
         Aluno.instance = instance;

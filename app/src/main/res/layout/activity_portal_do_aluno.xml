@@ -41,25 +41,40 @@
             android:src="@android:drawable/ic_menu_camera"
             app:maxImageSize="60dp" />
 
-        <TextView
-            android:id="@+id/txtNomeDescricao"
+        <!-- Nome e matrícula do aluno -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="Nome"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="4dp">
+
+            <!-- Nome do aluno -->
+            <TextView
+                android:id="@+id/txtNomeRecebidoProfessor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome: Nome do Aluno"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Matrícula do aluno -->
+            <TextView
+                android:id="@+id/txtMatriculaRecebido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Matrícula"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/txtNomeRecebidoProfessor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </LinearLayout>
 
         <!-- ID do aluno (invisível) -->
-        <TextView
-            android:id="@+id/txtNomeRecebidoProfessor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/ic_launcher_atualizar1_background"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
         <TextView
             android:id="@+id/txtIdRecebido"
             android:layout_width="wrap_content"
@@ -70,7 +85,6 @@
     </LinearLayout>
 
     <!-- Botões de Ação -->
-
     <TextView
         android:id="@+id/textView8"
         android:layout_width="200dp"
@@ -139,22 +153,33 @@
     </LinearLayout>
 
     <!-- Botão AVA -->
-
-    <!-- Botão de Matrícula -->
-
-    <!-- Lista de Professores com Notas e Faltas -->
-
     <Button
         android:id="@+id/btnAva"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="36dp"
         android:background="@drawable/pesquisaonline"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.806"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/botoesAcoes" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.397" />
 
+    <!-- Botão para a carteirinha -->
+    <Button
+        android:id="@+id/btnCarteirinha"
+        android:layout_width="86dp"
+        android:layout_height="86dp"
+        android:background="@drawable/ic_launcher_carterinha_foreground"
+        android:backgroundTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39" />
+
+    <!-- Botão de Matrícula -->
     <Button
         android:id="@+id/btnMatricula"
         android:layout_width="68dp"
@@ -198,14 +223,28 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Materia Virtual"
+        android:text="Matéria Virtual"
         android:textColor="@color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnAva"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.841"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.965" />
+        app:layout_constraintVertical_bias="0.327" />
+
+    <TextView
+        android:id="@+id/textView42"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carteirinha Estudante"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.327" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

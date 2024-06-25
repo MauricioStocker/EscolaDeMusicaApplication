@@ -23,9 +23,9 @@ MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         conexao = Conexao.getInstance(this);
 
-     // buscaTodosAlunos();
+      buscaTodosAlunos();
        // buscaTodosProfessores();
-        buscaTodasTurmas();
+        //buscaTodasTurmas();
     }
 
     public void buscaTodosAlunos() {
@@ -41,7 +41,8 @@ MainActivity extends AppCompatActivity {
                 Log.d("Aluno", "Status: " + aluno.getStatus());
                 Log.d("Aluno", "Telefone: " + aluno.getAluno_telefone());
                 Log.d("Aluno", "CPF: " + aluno.getAluno_cpf());
-                Log.d("Aluno", "foto: " + aluno.getAluno_foto());
+                Log.d("Aluno", "dtanas: " + aluno.getAluno_dataNascimento());
+                Log.d("Aluno", "matricula: " + aluno.getAluno_matricula());
                 Log.d("Aluno", "-------------------------------------");
             }
         } else {

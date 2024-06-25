@@ -66,6 +66,7 @@ public class Conexao extends SQLiteOpenHelper {
 				"aluno_data_nasci TEXT," +
 				"aluno_telefone TEXT," +
 				"aluno_sexo TEXT," +
+				"aluno_matricula TEXT," +
 				"aluno_foto TEXT, aluno_status TEXT);";
 		String sql_professor = "CREATE TABLE professor (" +
 				"professor_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -179,6 +180,8 @@ public class Conexao extends SQLiteOpenHelper {
 			dados_aluno.put("aluno_cpf", aluno.getAluno_cpf());
 			dados_aluno.put("aluno_telefone", aluno.getAluno_telefone());
 			dados_aluno.put("aluno_status", aluno.getStatus());
+			dados_aluno.put("aluno_data_nasci",aluno.getAluno_dataNascimento());
+			dados_aluno.put("aluno_matricula",aluno.getAluno_matricula());
 
 			// Inserção do aluno no banco e obtenção do ID do aluno recém-cadastrado
 			long idAluno = db.insertOrThrow("aluno", null, dados_aluno);
@@ -387,6 +390,8 @@ public class Conexao extends SQLiteOpenHelper {
 				aluno.setAluno_telefone(cursor.getString(cursor.getColumnIndexOrThrow("aluno_telefone"))); // Adicione essa linha para definir o telefone
 				aluno.setStatus(cursor.getString(cursor.getColumnIndexOrThrow("aluno_status")));
 				aluno.setAluno_senha(cursor.getString(cursor.getColumnIndexOrThrow("aluno_senha")));
+				aluno.setAluno_dataNascimento(cursor.getString(cursor.getColumnIndexOrThrow("aluno_data_nasci")));
+				aluno.setAluno_matricula(cursor.getString(cursor.getColumnIndexOrThrow("aluno_matricula")));
 				listaAlunos.add(aluno);
 			} while (cursor.moveToNext());
 		}
@@ -1091,5 +1096,41 @@ public class Conexao extends SQLiteOpenHelper {
 
 		return nomeProfessor;
 	}
+	public Aluno buscarAlunoPorId(int idAluno) {
+		Aluno aluno = null;
+		SQLiteDatabase db = this.getReadableDatabase();
+		String[] projection = {
+				"aluno_nome",
+				"aluno_cpf",
+				"aluno_data_nasci",
+				"aluno_matricula",
+				"aluno_foto"
+		};
+		String selection = "aluno_id = ?";
+		String[] selectionArgs = { String.valueOf(idAluno) };
+		Cursor cursor = db.query(
+				"aluno",
+				projection,
+				selection,
+				selectionArgs,
+				null,
+				null,
+				null
+		);
+
+		if (cursor != null && cursor.moveToFirst()) {
+			aluno = new Aluno();
+			aluno.setAluno_id(idAluno);
+			aluno.setAluno_nome(cursor.getString(cursor.getColumnIndexOrThrow("aluno_nome")));
+			aluno.setAluno_cpf(cursor.getString(cursor.getColumnIndexOrThrow("aluno_cpf")));
+			aluno.setAluno_dataNascimento(cursor.getString(cursor.getColumnIndexOrThrow("aluno_data_nasci")));
+			aluno.setAluno_matricula(cursor.getString(cursor.getColumnIndexOrThrow("aluno_matricula")));
+			aluno.setAluno_foto(cursor.getString(cursor.getColumnIndexOrThrow("aluno_foto")));
+			cursor.close();
+		}
+
+		return aluno;
+	}
+
 
 }
