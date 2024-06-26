@@ -67,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Tel. (41) 995463205"
                 android:inputType="phone"
+                android:maxLength="15"
                 android:maxLines="1"
                 android:textAlignment="center"
                 android:textColor="@color/black"

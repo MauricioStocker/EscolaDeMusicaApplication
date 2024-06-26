@@ -64,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Telefone"
                 android:inputType="phone"
+                android:maxLength="15"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
