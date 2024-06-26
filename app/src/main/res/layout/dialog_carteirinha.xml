@@ -94,9 +94,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="Não serve como ducumento original"
+            android:text="Não serve como documento original"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textoAdicional2"
@@ -106,7 +107,8 @@
             android:gravity="center"
             android:text="Usar para caso sejá necessario se apresentar dentro da escola"
             android:textColor="@color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView5"

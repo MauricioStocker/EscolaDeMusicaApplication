@@ -43,6 +43,7 @@ MainActivity extends AppCompatActivity {
                 Log.d("Aluno", "CPF: " + aluno.getAluno_cpf());
                 Log.d("Aluno", "dtanas: " + aluno.getAluno_dataNascimento());
                 Log.d("Aluno", "matricula: " + aluno.getAluno_matricula());
+                Log.d("Aluno", "senha: " + aluno.getAluno_senha());
                 Log.d("Aluno", "-------------------------------------");
             }
         } else {
