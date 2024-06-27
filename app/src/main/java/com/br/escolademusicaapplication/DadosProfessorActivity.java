@@ -12,6 +12,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -178,13 +179,8 @@ public class DadosProfessorActivity extends AppCompatActivity {
             int professorId = Integer.parseInt(idText);
 
             SQLiteDatabase db = conexao.getWritableDatabase();
-
-            // Defina a cláusula WHERE e os argumentos
-            String whereClause = "professor_id = ?";
             String[] whereArgs = {String.valueOf(professorId)};
-
-            // Exclui o professor (e todos os registros associados na tabela aluno_professor)
-            int linhasAfetadas = db.delete("professor", whereClause, whereArgs);
+            int linhasAfetadas = db.delete("professor", "professor_id = ?", whereArgs);
             db.close();
 
             if (linhasAfetadas > 0) {
@@ -197,7 +193,6 @@ public class DadosProfessorActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "ID do professor não encontrado", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     private void atualizarProfessor() {
         String idText = txtIdDados.getText().toString().replace("ID: ", "");
@@ -271,4 +266,4 @@ public class DadosProfessorActivity extends AppCompatActivity {
             }
         }
     }
-    }
+}

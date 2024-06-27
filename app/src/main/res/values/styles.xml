@@ -3,4 +3,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
     </style>
+    <style name="AppTheme.WithBackground" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/funodetelaescolademusica</item>
+    </style>
 </resources>

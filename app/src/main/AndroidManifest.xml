@@ -6,9 +6,7 @@
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-
     <uses-feature android:name="android.hardware.camera" />
-
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
@@ -24,87 +22,108 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
+
+        <!-- Atividade com temas específicos -->
         <activity
             android:name=".TurmasFinalizadasActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".AddGaleriaActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".AddCursoActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".ResultadoActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".QuestionarioActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".EdicaoPerfilProfessorActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".DadosAlunoActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".ListaAlunosRegistradoActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".ListaAlunosActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".TelaMatriculaActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".ListaCursosActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".GaleriaFotosActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".DadosProfessorActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".ListaProfessorActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".CadastroProfessorActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".CadastroAlunoActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".PainelAdmActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".PortalProfessorActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".PortalDoAlunoActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".TelaPrincipalActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".TelaLoginActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <activity
             android:name=".ApresentacaoActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
