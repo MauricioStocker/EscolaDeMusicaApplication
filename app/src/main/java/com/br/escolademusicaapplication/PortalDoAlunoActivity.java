@@ -153,7 +153,7 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 		btnExcluir.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				confirmarExclusao();
+				confirmarInativacao();
 			}
 		});
 
@@ -317,39 +317,45 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 	// Continuação da implementação da PortalDoAlunoActivity
 
 	// Método para confirmar a exclusão do aluno
-	private void confirmarExclusao() {
+	// Método para confirmar a inativação do aluno
+	private void confirmarInativacao() {
 		String nome = txtNomeRecebido.getText().toString();
-		AlertDialog.Builder confirmaExclusao = new AlertDialog.Builder(PortalDoAlunoActivity.this);
-		confirmaExclusao.setTitle("Atenção!");
-		confirmaExclusao.setMessage("Tem certeza que quer excluir " + nome + "? ");
-		confirmaExclusao.setCancelable(false);
-		confirmaExclusao.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+		AlertDialog.Builder confirmaInativacao = new AlertDialog.Builder(PortalDoAlunoActivity.this);
+		confirmaInativacao.setTitle("Atenção!");
+		confirmaInativacao.setMessage("Tem certeza que quer inativar " + nome + "? ");
+		confirmaInativacao.setCancelable(false);
+		confirmaInativacao.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				excluirAluno();
+				inativarAluno();
 			}
 		});
-		confirmaExclusao.setNegativeButton("Não", null);
-		confirmaExclusao.create().show();
+		confirmaInativacao.setNegativeButton("Não", null);
+		confirmaInativacao.create().show();
 	}
 
+
 	// Método para excluir o aluno do banco de dados
-	private void excluirAluno() {
+	// Método para inativar o aluno no banco de dados
+	private void inativarAluno() {
 		int idAluno = AlunoSingleton.getInstance().getAluno().getAluno_id();
 
 		SQLiteDatabase db = conexao.getWritableDatabase();
 
-		String[] whereArgs = {String.valueOf(idAluno)};
-		int linhasAfetadas = db.delete("aluno", "aluno_id = ?", whereArgs);
+		ContentValues values = new ContentValues();
+		values.put("aluno_status", "inativo");
 
+		String[] whereArgs = {String.valueOf(idAluno)};
+		int linhasAfetadas = db.update("aluno", values, "aluno_id = ?", whereArgs);
 
 		if (linhasAfetadas > 0) {
-			Toast.makeText(getApplicationContext(), "Aluno excluído com sucesso", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Aluno inativado com sucesso", Toast.LENGTH_SHORT).show();
 			voltarTelaInicial();
 		} else {
-			Toast.makeText(getApplicationContext(), "Erro ao excluir o Aluno", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Erro ao inativar o Aluno", Toast.LENGTH_SHORT).show();
 		}
 	}
+
 
 	// Método para voltar para a tela inicial
 	public void voltarTelaInicial() {
