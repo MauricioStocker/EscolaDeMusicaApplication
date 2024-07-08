@@ -6,7 +6,9 @@
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
+
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32"
@@ -15,14 +17,18 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher_escola_2"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_escola_2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="31">
-
+        tools:targetApi="tiramisu">
+        <activity
+            android:name=".MaterialEstudoActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.WithBackground" />
         <!-- Atividade com temas específicos -->
         <activity
             android:name=".TurmasFinalizadasActivity"
@@ -35,8 +41,8 @@
         <activity
             android:name=".AddCursoActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme.WithBackground" />
+            android:theme="@style/AppTheme.WithBackground"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ResultadoActivity"
             android:exported="true"
@@ -56,8 +62,8 @@
         <activity
             android:name=".ListaAlunosRegistradoActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme.WithBackground" />
+            android:theme="@style/AppTheme.WithBackground"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ListaAlunosActivity"
             android:exported="true"
@@ -81,18 +87,18 @@
         <activity
             android:name=".ListaProfessorActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme.WithBackground" />
+            android:theme="@style/AppTheme.WithBackground"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".CadastroProfessorActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme.WithBackground" />
+            android:theme="@style/AppTheme.WithBackground"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".CadastroAlunoActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan"
-            android:theme="@style/AppTheme.WithBackground" />
+            android:theme="@style/AppTheme.WithBackground"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".PainelAdmActivity"
             android:exported="true"
@@ -122,8 +128,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

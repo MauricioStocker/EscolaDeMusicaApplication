@@ -152,34 +152,37 @@ public class TelaMatriculaActivity extends AppCompatActivity {
         String idAlunoString = txtIdAluno.getText().toString().replace("ID: ", "");
         String idProfessorString = txtIdProf.getText().toString().replace("ID: ", "");
 
-        // Verificar se o ID do professor está vazio ou contém apenas espaços em branco
         if (TextUtils.isEmpty(idProfessorString.trim())) {
-            // Mostrar uma mensagem de erro informando ao usuário que um professor deve ser selecionado
             Toast.makeText(this, "Por favor, selecione um professor antes de salvar a matrícula.", Toast.LENGTH_SHORT).show();
-            return; // Retorna sem tentar salvar a matrícula, já que não há professor selecionado
+            return;
         }
 
         int idAluno = Integer.parseInt(idAlunoString);
 
-        // Verificar se o ID do professor é válido
         int idProfessor;
         try {
             idProfessor = Integer.parseInt(idProfessorString);
         } catch (NumberFormatException e) {
-            // Se o ID do professor não puder ser convertido em um número inteiro, mostrar uma mensagem de erro
-            Toast.makeText(this, "ID do professor inválido, por favor selecione um professor " +
-                    "para se matricular.", Toast.LENGTH_SHORT).show();
-            return; // Retorna sem tentar salvar a matrícula
+            Toast.makeText(this, "ID do professor inválido, por favor selecione um professor para se matricular.", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         // Verificar se o vínculo entre o aluno e o professor já existe
         if (alunoProfessorExists(idAluno, idProfessor)) {
-            Toast.makeText(this, "ERRO AO MATRICULAR, VOCÊ JÁ SE MATRICULOU NESSA DISCIPLINA" +
-                    "E SERÁ REDIRECIONADO AO PORTAL DO ALUNO", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ERRO AO MATRICULAR, VOCÊ JÁ SE MATRICULOU NESSA DISCIPLINA E SERÁ REDIRECIONADO AO PORTAL DO ALUNO", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, PortalDoAlunoActivity.class);
             intent.putExtra("aluno_id", idAluno);
             startActivity(intent);
-            return; // Retorna sem tentar salvar a matrícula, pois já existe o vínculo
+            return;
+        }
+
+        // Verificar se o professor não é "Sergio" e se o número de alunos excede o limite
+        if (idProfessor != 1) { // Supondo que o ID do professor "Sergio" é 1
+            int numeroAlunos = conexao.contarAlunosPorProfessor(idProfessor);
+            if (numeroAlunos >= 10) {
+                Toast.makeText(this, "Limite de alunos excedido. Por favor, aguarde a próxima turma ou mande uma mensagem para o coordenador da escola.", Toast.LENGTH_LONG).show();
+                return;
+            }
         }
 
         Aluno aluno = conexao.buscarAlunoPorId(String.valueOf(idAluno));
@@ -193,13 +196,13 @@ public class TelaMatriculaActivity extends AppCompatActivity {
             intent.putExtra("aluno_id", idAluno);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "ERRO AO MATRICULAR, VOCÊ JÁ SE MATRICULOU NESSA DISCIPLINA" +
-                    "E SERÁ REDIRECIONADO AO PORTAL DO ALUNO", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ERRO AO MATRICULAR, VOCÊ JÁ SE MATRICULOU NESSA DISCIPLINA E SERÁ REDIRECIONADO AO PORTAL DO ALUNO", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, PortalDoAlunoActivity.class);
             intent.putExtra("aluno_id", idAluno);
             startActivity(intent);
         }
     }
+
 
     // Método para verificar se o vínculo entre aluno e professor já existe
     private boolean alunoProfessorExists(int idAluno, int idProfessor) {

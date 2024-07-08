@@ -40,6 +40,7 @@ public class RankAlunoAdapter extends RecyclerView.Adapter<RankAlunoAdapter.View
 
         holder.textViewNomeAluno.setText("Nome do Aluno: " + alunoProfessor.getAluno().getAluno_nome());
         holder.textViewNomeProfessor.setText("Nome do Professor: " + alunoProfessor.getProfessor().getProfessor_nome());
+        holder.textViewDisciplina.setText("Disciplina: " + alunoProfessor.getProfessor().getProfessor_disciplina());
 
         int notaTotal;
 
@@ -72,6 +73,7 @@ public class RankAlunoAdapter extends RecyclerView.Adapter<RankAlunoAdapter.View
             holder.imageViewPositionIcon.setVisibility(View.GONE);
         }
     }
+
     @Override
     public int getItemCount() {
         return alunoProfessorList.size();
@@ -80,6 +82,7 @@ public class RankAlunoAdapter extends RecyclerView.Adapter<RankAlunoAdapter.View
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewNomeAluno;
         TextView textViewNomeProfessor;
+        TextView textViewDisciplina;
         TextView textViewNotaTotal;
         ImageView imageViewPositionIcon;
 
@@ -87,6 +90,7 @@ public class RankAlunoAdapter extends RecyclerView.Adapter<RankAlunoAdapter.View
             super(itemView);
             textViewNomeAluno = itemView.findViewById(R.id.textViewNomeAluno);
             textViewNomeProfessor = itemView.findViewById(R.id.textViewNomeProfessor);
+            textViewDisciplina = itemView.findViewById(R.id.textViewDisciplina);
             textViewNotaTotal = itemView.findViewById(R.id.textViewNotaTotal);
             imageViewPositionIcon = itemView.findViewById(R.id.imageViewPositionIcon);
         }

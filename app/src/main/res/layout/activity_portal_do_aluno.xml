@@ -136,7 +136,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
-            android:background="@drawable/ic_launcher_atualiza_foto_foreground"
+            android:background="@drawable/ic_launcher_salvar_foto_aluno_foreground"
             android:backgroundTint="@color/material_dynamic_neutral_variant0"
             android:contentDescription="Botão de atualizar informações do aluno" />
 
@@ -179,6 +179,7 @@
         app:layout_constraintVertical_bias="0.39" />
 
     <!-- Botão de Matrícula -->
+
     <Button
         android:id="@+id/btnMatricula"
         android:layout_width="68dp"
@@ -190,7 +191,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.514" />
+        app:layout_constraintVertical_bias="0.502" />
 
     <TextView
         android:id="@+id/textView2"
@@ -202,10 +203,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.764"
+        app:layout_constraintHorizontal_bias="0.792"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.511" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
         android:id="@+id/listaAulas"

@@ -96,7 +96,7 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 		btnAva.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				chamaAva();
+				chamaMaterialEstudo();
 			}
 		});
 
@@ -457,14 +457,15 @@ public class PortalDoAlunoActivity extends AppCompatActivity {
 	}
 
 
-	public void chamaAva() {
-		Intent intent = new Intent(this, QuestionarioActivity.class);
+	public void chamaMaterialEstudo() {
+		Intent intent = new Intent(this, MaterialEstudoActivity.class);
 		// Passar dados do aluno para a próxima Activity
 		intent.putExtra("nomeAluno", txtNomeRecebido.getText().toString());
 		intent.putExtra("idAluno", txtIdRecebido.getText().toString());
 		startActivity(intent);
 		finish(); // Isso pode ser omitido se você deseja que a tela de Portal do Aluno permaneça na pilha de atividades
 	}
+
 	private void mostrarCarteirinha() {
 		// Obtém o ID do aluno logado
 		int idAlunoLogado = AlunoSingleton.getInstance().getAluno().getAluno_id();

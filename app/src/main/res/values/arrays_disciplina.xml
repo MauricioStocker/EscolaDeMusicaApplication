@@ -1,11 +1,26 @@
 <resources>
     <!-- Outras strings -->
     <string-array name="disciplinas_array">
-        <item>Matemática</item>
-        <item>Português</item>
-        <item>Inglês</item>
-        <item>História</item>
-        <item>Geografia</item>
+        <item>Teoria Musical</item>
+        <item>História da Música</item>
+        <item>Percepção Musical</item>
+        <item>Harmonia</item>
+        <item>Composição</item>
+        <item>Prática de Conjunto</item>
+        <item>Improvisação</item>
+        <item>Técnica Vocal</item>
+        <item>Instrumento (Piano)</item>
+        <item>Instrumento (Guitarra)</item>
+        <item>Instrumento (Violão)</item>
+        <item>Instrumento (Bateria)</item>
+        <item>Arranjo</item>
+        <item>Produção Musical</item>
+        <item>Tecnologia da Música</item>
+        <item>Educação Musical</item>
+        <item>Estética e Crítica Musical</item>
+        <item>Leitura à Primeira Vista</item>
+        <item>Musicoterapia</item>
+
         <item>Virtual</item>
 
         <!-- Adicione outras disciplinas conforme necessário -->

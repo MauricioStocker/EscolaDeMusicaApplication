@@ -71,7 +71,7 @@ public class Conexao extends SQLiteOpenHelper {
 		String sql_professor = "CREATE TABLE professor (" +
 				"professor_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
 				"professor_nome TEXT ," +
-				"professor_cpf TEXT unique," +
+				"professor_cpf TEXT ," +
 				"professor_senha TEXT ," +
 				"professor_disciplina TEXT," +
 				"professor_telefone TEXT," +
@@ -554,7 +554,8 @@ public class Conexao extends SQLiteOpenHelper {
 		String sql = "SELECT a.aluno_id, a.aluno_nome, ap.aluno_nota_primeiro_bi, ap.aluno_nota_segundo_bi, ap.aluno_faltas " +
 				"FROM aluno_professor ap " +
 				"INNER JOIN aluno a ON ap.id_aluno = a.aluno_id " +
-				"WHERE ap.id_professor = ?";
+				"WHERE ap.id_professor = ? " +
+				"ORDER BY a.aluno_nome";
 		Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(idProfessor)});
 		List<Aluno_Professor> listaAlunosProfessor = new ArrayList<>();
 		if (cursor.moveToFirst()) {
@@ -631,14 +632,14 @@ public class Conexao extends SQLiteOpenHelper {
 		}
 		List<Aluno_Professor> listaAlunosProfessor = new ArrayList<>();
 		// Consulta SQL para selecionar todos os registros da tabela aluno_professor ordenados pela soma das notas em ordem decrescente,
-		// incluindo os nomes dos alunos e professores
-		String sql = "SELECT a.aluno_id, a.aluno_nome, p.professor_id, p.professor_nome, ap.aluno_nota_primeiro_bi, ap.aluno_nota_segundo_bi, " +
+		// incluindo os nomes dos alunos e professores e a disciplina
+		String sql = "SELECT a.aluno_id, a.aluno_nome, p.professor_id, p.professor_nome, p.professor_disciplina, ap.aluno_nota_primeiro_bi, ap.aluno_nota_segundo_bi, " +
 				"((ap.aluno_nota_primeiro_bi + ap.aluno_nota_segundo_bi) / 2) AS nota_total  " +
 				"FROM aluno_professor ap " +
 				"INNER JOIN aluno a ON ap.id_aluno = a.aluno_id " +
 				"INNER JOIN professor p ON ap.id_professor = p.professor_id " +
 				"ORDER BY nota_total DESC " +
-				"LIMIT 5"; //
+				"LIMIT 5";
 		Cursor cursor = db.rawQuery(sql, null);
 		if (cursor.moveToFirst()) {
 			do {
@@ -647,6 +648,7 @@ public class Conexao extends SQLiteOpenHelper {
 				String alunoNome = cursor.getString(cursor.getColumnIndexOrThrow("aluno_nome"));
 				int professorId = cursor.getInt(cursor.getColumnIndexOrThrow("professor_id"));
 				String professorNome = cursor.getString(cursor.getColumnIndexOrThrow("professor_nome"));
+				String professorDisciplina = cursor.getString(cursor.getColumnIndexOrThrow("professor_disciplina"));
 				int notaPrimeiroBim = cursor.getInt(cursor.getColumnIndexOrThrow("aluno_nota_primeiro_bi"));
 				int notaSegundoBim = cursor.getInt(cursor.getColumnIndexOrThrow("aluno_nota_segundo_bi"));
 				// Crie objetos Aluno e Professor
@@ -657,6 +659,7 @@ public class Conexao extends SQLiteOpenHelper {
 				Professor professor = new Professor();
 				professor.setProfessor_id(professorId);
 				professor.setProfessor_nome(professorNome);
+				professor.setProfessor_disciplina(professorDisciplina);
 				// Crie um objeto Aluno_Professor com os dados obtidos
 				Aluno_Professor alunoProfessor = new Aluno_Professor();
 				alunoProfessor.setAluno(aluno);
@@ -760,13 +763,13 @@ public class Conexao extends SQLiteOpenHelper {
 		}
 		List<Aluno_Professor> listaAlunosProfessor = new ArrayList<>();
 		// Consulta SQL para selecionar os registros da tabela aluno_professor ordenados pela nota do segundo bimestre em ordem decrescente,
-		// incluindo os nomes dos alunos e professores
-		String sql = "SELECT a.aluno_id, a.aluno_nome, p.professor_id, p.professor_nome, ap.aluno_nota_segundo_bi " +
+		// incluindo os nomes dos alunos, professores e a disciplina
+		String sql = "SELECT a.aluno_id, a.aluno_nome, p.professor_id, p.professor_nome, p.professor_disciplina, ap.aluno_nota_segundo_bi " +
 				"FROM aluno_professor ap " +
 				"INNER JOIN aluno a ON ap.id_aluno = a.aluno_id " +
 				"INNER JOIN professor p ON ap.id_professor = p.professor_id " +
 				"ORDER BY ap.aluno_nota_segundo_bi DESC " +
-				"LIMIT 5"; //
+				"LIMIT 5";
 		Cursor cursor = db.rawQuery(sql, null);
 		if (cursor.moveToFirst()) {
 			do {
@@ -775,6 +778,7 @@ public class Conexao extends SQLiteOpenHelper {
 				String alunoNome = cursor.getString(cursor.getColumnIndexOrThrow("aluno_nome"));
 				int professorId = cursor.getInt(cursor.getColumnIndexOrThrow("professor_id"));
 				String professorNome = cursor.getString(cursor.getColumnIndexOrThrow("professor_nome"));
+				String professorDisciplina = cursor.getString(cursor.getColumnIndexOrThrow("professor_disciplina"));
 				int notaSegundoBim = cursor.getInt(cursor.getColumnIndexOrThrow("aluno_nota_segundo_bi"));
 				// Crie objetos Aluno e Professor
 				Aluno aluno = new Aluno();
@@ -784,6 +788,7 @@ public class Conexao extends SQLiteOpenHelper {
 				Professor professor = new Professor();
 				professor.setProfessor_id(professorId);
 				professor.setProfessor_nome(professorNome);
+				professor.setProfessor_disciplina(professorDisciplina);
 				// Crie um objeto Aluno_Professor com os dados obtidos
 				Aluno_Professor alunoProfessor = new Aluno_Professor();
 				alunoProfessor.setAluno(aluno);
@@ -803,13 +808,13 @@ public class Conexao extends SQLiteOpenHelper {
 		}
 		List<Aluno_Professor> listaAlunosProfessor = new ArrayList<>();
 		// Consulta SQL para selecionar os registros da tabela aluno_professor ordenados pela nota do primeiro bimestre em ordem decrescente,
-		// incluindo os nomes dos alunos e professores
-		String sql = "SELECT a.aluno_id, a.aluno_nome, p.professor_id, p.professor_nome, ap.aluno_nota_primeiro_bi " +
+		// incluindo os nomes dos alunos, professores e a disciplina
+		String sql = "SELECT a.aluno_id, a.aluno_nome, p.professor_id, p.professor_nome, p.professor_disciplina, ap.aluno_nota_primeiro_bi " +
 				"FROM aluno_professor ap " +
 				"INNER JOIN aluno a ON ap.id_aluno = a.aluno_id " +
 				"INNER JOIN professor p ON ap.id_professor = p.professor_id " +
 				"ORDER BY ap.aluno_nota_primeiro_bi DESC " +
-				"LIMIT 5"; //
+				"LIMIT 5";
 		Cursor cursor = db.rawQuery(sql, null);
 		if (cursor.moveToFirst()) {
 			do {
@@ -818,6 +823,7 @@ public class Conexao extends SQLiteOpenHelper {
 				String alunoNome = cursor.getString(cursor.getColumnIndexOrThrow("aluno_nome"));
 				int professorId = cursor.getInt(cursor.getColumnIndexOrThrow("professor_id"));
 				String professorNome = cursor.getString(cursor.getColumnIndexOrThrow("professor_nome"));
+				String professorDisciplina = cursor.getString(cursor.getColumnIndexOrThrow("professor_disciplina"));
 				int notaPrimeiroBim = cursor.getInt(cursor.getColumnIndexOrThrow("aluno_nota_primeiro_bi"));
 				// Crie objetos Aluno e Professor
 				Aluno aluno = new Aluno();
@@ -827,6 +833,7 @@ public class Conexao extends SQLiteOpenHelper {
 				Professor professor = new Professor();
 				professor.setProfessor_id(professorId);
 				professor.setProfessor_nome(professorNome);
+				professor.setProfessor_disciplina(professorDisciplina);
 				// Crie um objeto Aluno_Professor com os dados obtidos
 				Aluno_Professor alunoProfessor = new Aluno_Professor();
 				alunoProfessor.setAluno(aluno);
@@ -883,8 +890,6 @@ public class Conexao extends SQLiteOpenHelper {
 			}
 		}
 	}
-
-
 	public List<Curso> getAllCursos() {
 		List<Curso> listaCursos = new ArrayList<>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -923,15 +928,12 @@ public class Conexao extends SQLiteOpenHelper {
 
 		return rowsAffected > 0;
 	}
-
-
 	public boolean deleteCurso(int id) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		int rowsDeleted = db.delete("curso", "curso_id=?", new String[]{String.valueOf(id)});
 
 		return rowsDeleted > 0;
 	}
-
 	public boolean insertGaleria(String titulo, String descricao, String imagemBase64) {
 		SQLiteDatabase db = null;
 		try {
@@ -962,7 +964,6 @@ public class Conexao extends SQLiteOpenHelper {
 			}
 		}
 	}
-
 	public List<Galeria> getAllGalerias() {
 		List<Galeria> listaGalerias = new ArrayList<>();
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -985,7 +986,6 @@ public class Conexao extends SQLiteOpenHelper {
 		cursor.close();
 		return listaGalerias;
 	}
-
 	public boolean updateGaleria(int id, String titulo, String descricao, String imagem) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -1001,7 +1001,6 @@ public class Conexao extends SQLiteOpenHelper {
 
 		return rowsAffected > 0;
 	}
-
 	public boolean deleteGaleria(int id) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		int rowsDeleted = db.delete("galeria", "galeria_id=?", new String[]{String.valueOf(id)});
@@ -1031,8 +1030,6 @@ public class Conexao extends SQLiteOpenHelper {
 		// Atualizar a lista de alunos na interface para estar vazia
 		listaAlunosProfessor.clear();
 	}
-
-
 	public List<Turma> buscarTodasTurmas() {
 		List<Turma> turmas = new ArrayList<>();
 		SQLiteDatabase db = getReadableDatabase();
@@ -1064,8 +1061,6 @@ public class Conexao extends SQLiteOpenHelper {
 
 		return turmas;
 	}
-
-
 	public void limparRelacionamentoAlunoProfessor(int professorId) {
 		SQLiteDatabase db = getWritableDatabase();
 
@@ -1076,7 +1071,6 @@ public class Conexao extends SQLiteOpenHelper {
 			Log.e("TAG", "Erro ao limpar relacionamento aluno-professor: " + e.getMessage());
 		}
 	}
-
 	public String buscarNomeProfessor(int professorId) {
 		SQLiteDatabase db = getReadableDatabase();
 		String nomeProfessor = "";
@@ -1131,6 +1125,21 @@ public class Conexao extends SQLiteOpenHelper {
 
 		return aluno;
 	}
+	public int contarAlunosPorProfessor(int idProfessor) {
+		String sql = "SELECT COUNT(*) FROM aluno_professor WHERE id_professor = ?";
+		Cursor cursor = getReadableDatabase().rawQuery(sql, new String[]{String.valueOf(idProfessor)});
 
+		if (cursor != null) {
+			cursor.moveToFirst();
+			int count = cursor.getInt(0);
+			cursor.close();
+			return count;
+		}
+		return 0;
+	}
+	public boolean removerAlunoDoProfessor(int alunoId, int professorId) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		return db.delete("Aluno_Professor", "id_aluno = ? AND id_professor = ?", new String[]{String.valueOf(alunoId), String.valueOf(professorId)}) > 0;
+	}
 
 }

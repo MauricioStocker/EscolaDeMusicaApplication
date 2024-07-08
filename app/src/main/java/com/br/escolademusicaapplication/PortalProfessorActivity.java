@@ -34,7 +34,7 @@ public class PortalProfessorActivity extends AppCompatActivity implements Profes
     private CircleImageView fotoProfessorPortal;
     private RecyclerView alunosRecyclerView;
     private ProfessorAlunoAdapter adapter;
-    private Button btnAlteraNotasAlunos, btnEditarCadastro, btnVoltar,btnSalvarTurma;
+    private Button btnAlteraNotasAlunos, btnEditarCadastro, btnVoltar, btnSalvarTurma, btnRemoverAluno;
     private int alunoSelecionadoId;
 
     @SuppressLint({"WrongViewCast", "SetTextI18n"})
@@ -58,6 +58,8 @@ public class PortalProfessorActivity extends AppCompatActivity implements Profes
         btnEditarCadastro = findViewById(R.id.btnEditarCadastro);
         btnVoltar = findViewById(R.id.btnVoltar);
         btnSalvarTurma = findViewById(R.id.btnSalvarTurma);
+        btnRemoverAluno = findViewById(R.id.btnRemoverAluno);
+
         btnSalvarTurma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +109,13 @@ public class PortalProfessorActivity extends AppCompatActivity implements Profes
                 // Limpar os campos e esconder o teclado
                 limparCamposAluno();
                 escondeTeclado();
+            }
+        });
+
+        btnRemoverAluno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removerAlunoSelecionado();
             }
         });
 
@@ -211,6 +220,7 @@ public class PortalProfessorActivity extends AppCompatActivity implements Profes
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
     private void salvarTurmaProfessor() {
         Professor professor = ProfessorSingleton.getInstance().getProfessor();
         if (professor != null) {
@@ -232,5 +242,34 @@ public class PortalProfessorActivity extends AppCompatActivity implements Profes
         }
     }
 
+    private void removerAlunoSelecionado() {
+        if (alunoSelecionadoId == 0) {
+            Toast.makeText(PortalProfessorActivity.this, "Por favor, escolha um aluno para remover.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        Professor professor = ProfessorSingleton.getInstance().getProfessor();
+        if (professor != null) {
+            int idProfessor = professor.getProfessor_id();
+
+            boolean remocaoSucesso = conexao.removerAlunoDoProfessor(alunoSelecionadoId, idProfessor);
+
+            if (remocaoSucesso) {
+                Toast.makeText(this, "Aluno removido com sucesso!", Toast.LENGTH_SHORT).show();
+
+                // Atualiza a lista de alunos
+                List<Aluno_Professor> listaAlunosProfessor = conexao.buscarAlunosDoProfessor(idProfessor);
+                if (!listaAlunosProfessor.isEmpty()) {
+                    setupRecyclerView(listaAlunosProfessor);
+                } else {
+                    setupRecyclerView(new ArrayList<>()); // Atualiza a lista para mostrar vazio
+                }
+                limparCamposAluno();
+            } else {
+                Toast.makeText(this, "Não foi possível remover o aluno.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Erro ao obter dados do professor.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

@@ -138,6 +138,7 @@ public class EdicaoPerfilProfessorActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 excluirProfessor();
+
             }
         });
         confirmaExclusao.setNegativeButton("Não", null);
@@ -150,7 +151,7 @@ public class EdicaoPerfilProfessorActivity extends AppCompatActivity {
         SQLiteDatabase db = conexao.getWritableDatabase();
         String[] whereArgs = {String.valueOf(professorId)};
         int linhasAfetadas = db.delete("professor", "professor_id = ?", whereArgs);
-        db.close();
+
 
         if (linhasAfetadas > 0) {
             Toast.makeText(getApplicationContext(), "Professor excluído com sucesso", Toast.LENGTH_SHORT).show();

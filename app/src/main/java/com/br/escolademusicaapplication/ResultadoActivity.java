@@ -1,5 +1,6 @@
 package com.br.escolademusicaapplication;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -28,6 +29,10 @@ public class ResultadoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.hide();
+        }
 
         textViewResultado = findViewById(R.id.textViewResultado);
         textViewMensagem = findViewById(R.id.textViewMensagem);
