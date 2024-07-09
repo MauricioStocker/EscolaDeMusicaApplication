@@ -1141,5 +1141,18 @@ public class Conexao extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		return db.delete("Aluno_Professor", "id_aluno = ? AND id_professor = ?", new String[]{String.valueOf(alunoId), String.valueOf(professorId)}) > 0;
 	}
+	public int buscarNotaAluno(int alunoId) {
+		int nota = 0; // Nota padrão, caso não haja registro
+
+		String query = "SELECT MAX(aluno_nota_primeiro_bi) FROM aluno_professor WHERE id_aluno = ?";
+		Cursor cursor = getReadableDatabase().rawQuery(query, new String[]{String.valueOf(alunoId)});
+
+		if (cursor.moveToFirst()) {
+			nota = cursor.getInt(0);
+		}
+		cursor.close();
+
+		return nota;
+	}
 
 }

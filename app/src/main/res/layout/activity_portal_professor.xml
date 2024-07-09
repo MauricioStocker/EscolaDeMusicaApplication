@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:maxLength="22"
+            android:maxLength="15"
             android:text="Nome Professor"
             android:textColor="@color/black"
             android:textSize="20sp"

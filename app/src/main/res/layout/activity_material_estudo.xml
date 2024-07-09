@@ -9,10 +9,9 @@
 
     <ImageView
         android:id="@+id/imgMaterial"
-        android:layout_width="410dp"
-        android:layout_height="350dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:scaleType="centerCrop"
         android:src="@drawable/materialetudo" />
 
@@ -21,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:text="Nome do Aluno"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/black"
@@ -38,10 +38,9 @@
 
             <TextView
                 android:id="@+id/tvMaterialTitulo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
                 android:text="Título do Material"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/black"
@@ -49,10 +48,9 @@
 
             <TextView
                 android:id="@+id/tvMaterialConteudo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
                 android:text="Conteúdo do Material"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/black"
@@ -61,13 +59,29 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnIrParaQuestionario"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/pesquisaonline"
-        android:gravity="center_vertical" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="8dp">
+
+        <Button
+            android:id="@+id/btnVoltarPortalAva"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right"
+            android:background="@drawable/ic_launcher_voltar2_foreground"
+            android:backgroundTint="@color/black"
+            android:gravity="right" />
+
+        <Button
+            android:id="@+id/btnIrParaQuestionario"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:background="@drawable/pesquisaonline"
+            android:gravity="center_vertical" />
+
+    </LinearLayout>
 
 </LinearLayout>

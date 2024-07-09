@@ -10,7 +10,9 @@ public class Aluno_Professor {
 
     private int aluno_faltas;
 
-    public int getAluno_notaPrimeiroBim() {
+
+
+	public int getAluno_notaPrimeiroBim() {
         return aluno_notaPrimeiroBim;
     }
 

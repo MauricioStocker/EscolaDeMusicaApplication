@@ -1,6 +1,7 @@
 package com.br.escolademusicaapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,14 +13,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MaterialEstudoActivity extends AppCompatActivity {
-	// Declaração de variáveis
 	private TextView tvNomeAluno;
 	private TextView tvMaterialTitulo;
 	private TextView tvMaterialConteudo;
 	private ImageView imgMaterial;
 	private String nomeAluno;
 	private String idAluno;
-	private int numTentativas; // Variável para controlar o número de tentativas
+	private Button btnVoltarPortalAva;
+	private int numTentativas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +36,20 @@ public class MaterialEstudoActivity extends AppCompatActivity {
 		tvMaterialTitulo = findViewById(R.id.tvMaterialTitulo);
 		tvMaterialConteudo = findViewById(R.id.tvMaterialConteudo);
 		imgMaterial = findViewById(R.id.imgMaterial);
+		btnVoltarPortalAva = findViewById(R.id.btnVoltarPortalAva);
+		btnVoltarPortalAva.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				voltarPortal();
+			}
+		});
 
 		// Recuperar os dados do aluno da Intent
 		nomeAluno = getIntent().getStringExtra("nomeAluno");
 		idAluno = getIntent().getStringExtra("idAluno");
 
 		// Exibir o nome do aluno
-		tvNomeAluno.setText("Aluno: " + nomeAluno); // Alteração para incluir "Aluno: "
+		tvNomeAluno.setText("Aluno: " + nomeAluno);
 
 		// Definir o conteúdo do material de estudo
 		String titulo = "Materia para estudo sobre a prova virtual";
@@ -58,7 +66,7 @@ public class MaterialEstudoActivity extends AppCompatActivity {
 		imgMaterial.setImageResource(R.drawable.materialetudo);
 
 		// Lógica para controlar as tentativas
-		numTentativas = 0; // Inicializa o contador de tentativas
+		verificarTentativas();
 
 		Button btnIrParaQuestionario = findViewById(R.id.btnIrParaQuestionario);
 		btnIrParaQuestionario.setOnClickListener(new View.OnClickListener() {
@@ -66,11 +74,11 @@ public class MaterialEstudoActivity extends AppCompatActivity {
 			public void onClick(View v) {
 				if (numTentativas < 2) {
 					// Permitir que o usuário vá para o questionário
-					numTentativas++;
 					abrirQuestionario();
 				} else {
 					// Exibir mensagem de limite de tentativas atingido
-					Toast.makeText(MaterialEstudoActivity.this, "Você atingiu o limite de tentativas!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(MaterialEstudoActivity.this, "Você atingiu o limite de 2 tentativas!\nA nota maior tirada será a que permanecerá", Toast.LENGTH_LONG).show();
+
 				}
 			}
 		});
@@ -82,5 +90,31 @@ public class MaterialEstudoActivity extends AppCompatActivity {
 		intent.putExtra("nomeAluno", nomeAluno);
 		intent.putExtra("idAluno", idAluno);
 		startActivity(intent);
+	}
+
+	private void verificarTentativas() {
+		// Verificar tentativas já realizadas pelo usuário
+		SharedPreferences prefs = getSharedPreferences("tentativas_" + idAluno, MODE_PRIVATE);
+		numTentativas = prefs.getInt("numTentativas", 0);
+	}
+
+	private void salvarTentativas() {
+		// Salvar o número de tentativas quando necessário
+		SharedPreferences prefs = getSharedPreferences("tentativas_" + idAluno, MODE_PRIVATE);
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putInt("numTentativas", numTentativas);
+		editor.apply();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		// Ao destruir a atividade, garantir que as tentativas sejam salvas
+		salvarTentativas();
+	}
+	public void voltarPortal(){
+		Intent intent = new Intent(this, PortalDoAlunoActivity.class);
+		startActivity(intent);
+		finish();
 	}
 }

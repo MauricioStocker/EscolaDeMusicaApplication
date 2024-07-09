@@ -3,6 +3,7 @@ package com.br.escolademusicaapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,7 @@ public class QuestionarioActivity extends AppCompatActivity {
     private int indicePerguntaAtual = 0;
     private int contadorRespostasCorretas = 0;
     private int quantidadePerguntas = perguntas.length;
+    private int numTentativas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +59,16 @@ public class QuestionarioActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         Intent intent = getIntent();
-        nomeAluno = intent.getStringExtra("nomeAluno"); // Recebendo o nome do aluno da tela Portal de Aluno
-        idAluno = intent.getStringExtra("idAluno"); // Recebendo o ID do aluno da tela Portal de Aluno
+        nomeAluno = intent.getStringExtra("nomeAluno");
+        idAluno = intent.getStringExtra("idAluno");
 
         // Atualizar a exibição dos dados do aluno na tela
         TextView textViewNomeAluno = findViewById(R.id.textViewNomeAluno);
         TextView textViewIDAluno = findViewById(R.id.textViewIDAluno);
         textViewNomeAluno.setText("Nome: " + nomeAluno);
         textViewIDAluno.setText("ID: " + idAluno);
+
+        verificarTentativas();
 
         exibirPergunta();
 
@@ -103,11 +107,8 @@ public class QuestionarioActivity extends AppCompatActivity {
             String respostaSelecionada = radioButtonSelecionado.getText().toString();
 
             // Verificar se a resposta selecionada está correta
-            for (String respostaCorreta : respostasCorretas) {
-                if (respostaSelecionada.equals(respostaCorreta)) {
-                    contadorRespostasCorretas++;
-                    break; // Parar de verificar assim que encontrar a resposta correta
-                }
+            if (respostaSelecionada.equals(respostasCorretas[indicePerguntaAtual])) {
+                contadorRespostasCorretas++;
             }
 
             indicePerguntaAtual++;
@@ -116,6 +117,7 @@ public class QuestionarioActivity extends AppCompatActivity {
                 radioGroupOpcoes.clearCheck();
                 exibirPergunta();
             } else {
+                salvarTentativa(); // Salvar a tentativa ao final do questionário
                 exibirResultado();
             }
         } else {
@@ -125,10 +127,32 @@ public class QuestionarioActivity extends AppCompatActivity {
 
     private void exibirResultado() {
         Intent intent = new Intent(this, ResultadoActivity.class);
-        intent.putExtra("nomeAluno", nomeAluno); // Passando o nome do aluno para a tela Resultado
-        intent.putExtra("idAluno", idAluno); // Passando o ID do aluno para a tela Resultado
+        intent.putExtra("nomeAluno", nomeAluno);
+        intent.putExtra("idAluno", idAluno);
         intent.putExtra("acertos", contadorRespostasCorretas);
         intent.putExtra("totalPerguntas", quantidadePerguntas);
         startActivity(intent);
+    }
+
+    private void verificarTentativas() {
+        // Verificar se o usuário já excedeu o limite de tentativas
+        SharedPreferences prefs = getSharedPreferences("tentativas_" + idAluno, MODE_PRIVATE);
+        numTentativas = prefs.getInt("numTentativas", 0);
+
+        if (numTentativas >= 2) {
+            // Exibir mensagem de limite de tentativas atingido
+            Toast.makeText(this, "Você atingiu o limite de tentativas!", Toast.LENGTH_SHORT).show();
+
+            // Finalizar a atividade atual para evitar que o usuário continue
+            finish();
+        }
+    }
+
+    private void salvarTentativa() {
+        // Salvar o número de tentativas ao final do questionário
+        SharedPreferences prefs = getSharedPreferences("tentativas_" + idAluno, MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putInt("numTentativas", numTentativas + 1);
+        editor.apply();
     }
 }

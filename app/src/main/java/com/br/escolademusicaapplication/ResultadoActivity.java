@@ -70,15 +70,19 @@ public class ResultadoActivity extends AppCompatActivity {
                 int idProfessor = 1;
 
                 // Nota do aluno (você pode obter esse valor da tela ou de outra fonte de dados)
-                int nota = getIntent().getIntExtra("acertos", 0);
+                int notaNova = getIntent().getIntExtra("acertos", 0);
 
                 // Buscar o aluno pelo ID
                 Aluno aluno = conexao.buscarAlunoPorId(idAluno);
 
                 // Verificar se o aluno foi encontrado
                 if (aluno != null) {
-                    // Salvar a nota do aluno usando o método existente
-                    salvarNotaDoAluno(aluno, idProfessor, nota);
+                    // Buscar a nota atual do aluno
+                    int notaAtual = conexao.buscarNotaAluno(aluno.getAluno_id());
+
+                    // Salvar a maior nota entre a atual e a nova
+                    int maiorNota = Math.max(notaAtual, notaNova);
+                    salvarNotaDoAluno(aluno, idProfessor, maiorNota);
 
                     // Retornar à tela do portal do aluno
                     Intent intent = new Intent(ResultadoActivity.this, PortalDoAlunoActivity.class);
@@ -92,7 +96,6 @@ public class ResultadoActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     // Método para salvar a nota do aluno
@@ -117,9 +120,7 @@ public class ResultadoActivity extends AppCompatActivity {
         if (atualizacaoSucesso) {
             // Atualiza a lista de alunos
             List<Aluno_Professor> listaAlunosProfessor = conexao.buscarAlunosDoProfessor(idProfessor);
-
         }
         return atualizacaoSucesso;
     }
-
 }

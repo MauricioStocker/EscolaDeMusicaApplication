@@ -121,8 +121,8 @@ public class PortalProfessorActivity extends AppCompatActivity implements Profes
 
         if (professor != null) {
             txtRecebeIdProfe.setText(String.valueOf(professor.getProfessor_id()));
-            txtRecebeNomeProfe.setText("Nome: " + professor.getProfessor_nome());
-            txtRecebeDisciplinaProfe.setText("Disciplina: " + professor.getProfessor_disciplina());
+            txtRecebeNomeProfe.setText( professor.getProfessor_nome());
+            txtRecebeDisciplinaProfe.setText( professor.getProfessor_disciplina());
             if (professor.getProfessor_foto() != null && !professor.getProfessor_foto().isEmpty()) {
                 byte[] decodedString = Base64.decode(professor.getProfessor_foto(), Base64.DEFAULT);
                 fotoProfessorPortal.setImageBitmap(BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length));
